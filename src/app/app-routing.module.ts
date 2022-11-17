@@ -8,7 +8,7 @@ import { CarrinhoComponent } from './components/view/carrinho/carrinho.component
 import { MaterialComponent } from './material/material.component';
 const routes: Routes = [
   
-  { path: '/*', component: MaterialComponent } ,
+  { path: '', component: MaterialComponent } ,
   { path: 'login', component: LoginComponent } ,   
   { path: 'login/:credential', component: LoginComponent } ,
   { path: 'auth', component: LoginComponent } ,
