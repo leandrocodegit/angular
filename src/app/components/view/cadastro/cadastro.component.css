@@ -1,0 +1,53 @@
+html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+
+.form-control, .form-select{
+    padding: 0.575rem 0.75rem;
+    font-size: 1.2rem;
+}
+.form-control.is-invalid, .was-validated .form-control:invalid {
+    border-color: #e3d7b6;
+    }
+.form-select.is-invalid, .was-validated .form-select:invalid {
+     border-color: #e3d7b6;
+    }
+.accordion-button {
+    background-color: #f7f7f7;
+    }
+.form-control.is-valid, .was-validated .form-control:valid, .form-select.is-valid, .was-validated .form-select:valid {
+    border-color: #b7f1ff9e;
+    }
+
+.form-control.is-valid, .was-validated .form-control:valid, .form-select.is-valid:not([multiple]):not([size]), .form-select.is-valid:not([multiple])[size="1"], .was-validated .form-select:valid:not([multiple]):not([size]), .was-validated .form-select:valid:not([multiple])[size="1"] {
+    background-image: url("src/assets/img/check.svg");
+}
+.form-control.is-invalid, .was-validated .form-control:invalid, .form-select.is-invalid, .was-validated .form-select:invalid, .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"], .was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"]  {
+    background-image: url("src/assets/img/cancel.svg");
+}
+::-webkit-input-placeholder { /* Edge */
+  font-size: 0.85rem;
+  color:#c3d2e1;
+}
+#formulario{
+    padding-bottom: 150px;
+}
+
+.alert{
+    height: 5px;
+}
+
+.material-symbols-outlined { 
+    font-size: 28px;
+    margin-left: 0;
+} 
+
+b{
+    font-weight: 100;
+    font-family: 'Readex Pro', sans-serif !important;
+    font-size: 18px; 
+    vertical-align: super; 
+    margin-left: 20px;
+}

@@ -1,0 +1,17 @@
+#box{
+    width: 95vw;
+    height: 60vh;
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;;
+    margin: auto!important;
+    padding: auto!important; 
+    }
+    .close{
+        display: none;
+    }    
+   
+
+ 
+ 

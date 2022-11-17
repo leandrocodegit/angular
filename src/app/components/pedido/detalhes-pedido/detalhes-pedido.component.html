@@ -1,0 +1,21 @@
+<div class="box-detalhes">  
+    <h3 class="text-center">Detalhes do pedido</h3>
+    <ul class="list-group">
+      
+      <li class="list-group-item">Itens
+        <b>{{pedido.itens}}</b>
+      </li> 
+      <li *ngIf="pedido.desconto > 0" class="list-group-item">Descontos
+        <b class="price text-warning">-{{pedido.desconto | moeda}}</b>
+        </li>
+        <li *ngIf="isPix" class="list-group-item">Pix
+          <b class="price text-warning">-{{pedido.pagamento.descontos | moeda}}</b>
+          </li>
+        <li class="list-group-item">Subtotal
+          <b class="price">{{pedido.subTotal  | moeda}}</b>
+          </li>          
+        <li class="list-group-item">Total
+          <b class="price">{{pedido.total | moeda}}</b>
+          </li>
+    </ul> 
+</div> 

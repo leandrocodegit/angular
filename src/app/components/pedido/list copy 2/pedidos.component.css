@@ -1,0 +1,50 @@
+.mat-form-field + .mat-form-field {
+    margin-left: 5px;
+  }
+button{
+  width: 130px;   
+  border-radius: 4px!important;
+}
+
+  .mat-expansion-panel-body {
+    padding: 0 1px 6px!important;
+    background-color: red!important;
+}
+
+.mat-expansion-panel-header { 
+  padding: 0 10px; 
+}
+
+.icon {
+  vertical-align: middle;
+  margin-right: 10px;
+  margin-top: -2px;
+  width: 12px;
+  height: 12px; 
+  border-radius: 50%;
+}
+
+.bg-azul{
+  background-color: #53f7ff;
+}
+
+.bg-verde{
+  background-color: #17ff03;
+}
+
+.bg-vermelho{
+  background-color: #ff5959;
+}  
+ 
+ .text-verde{
+  color: #17ff03;
+}
+
+ .text-vermelho{
+  color: #ff5959;
+}  
+
+.text-azul{
+  color: #00477c;
+}
+ 

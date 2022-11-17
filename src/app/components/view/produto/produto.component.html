@@ -1,0 +1,42 @@
+<spa-top></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<div class="container text-center box-center">  
+    <div *ngIf="!isLoad && isStock">
+        <span *ngIf="qrcode.produto.estoque.estoqueAtual < 10" class="material-symbols-outlined svg2">
+            thermostat
+            </span>
+          <span *ngIf="(qrcode.desconto / qrcode.preco ) > 0.2" class="material-symbols-outlined svg">
+            sell
+            </span>
+            <br>
+        <div class="container">         
+            <img class="img-fluid mx-auto d-block image"
+                src="{{HOST}}/produto/imagem/{{qrcode.produto.codigo}}/300/{{qrcode.produto.imageOriginal.id}}"
+                style="width: 70%" />
+        </div>
+        <div class="container p-4">
+            <h5>{{qrcode.produto.descricao}}</h5>
+            <span>Bohemia</span>
+            <div class="mt-2">
+                <h2 class="display-3" style="letter-spacing: 2px;">{{qrcode.desconto > 0 ? (qrcode.preco -
+                    qrcode.desconto | moeda) : qrcode.preco | moeda}}</h2>
+                <p *ngIf="qrcode.desconto > 0" class="text-decoration-line-through text-warning h5"
+                    style="letter-spacing: 2px;font-family: initial">{{qrcode.preco | moeda}}</p>
+                <h5 *ngIf="(qrcode.desconto / qrcode.preco ) > 0.7" class="text-success">Super desconto</h5>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="!isStock">
+        <div class="container p-4">
+            <div class="container" style="color: #ffd9d9;padding-top:40%">
+                <p class="text-center">
+                    <span class="material-symbols-outlined big">
+                        sick
+                    </span>
+                </p>
+                <h3 class="text-center" id="status-pagamento">Ooops, produto sem estoque</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<spa-footer [nameButton]="nameButton" [isView]="!isLoad" [isViewIcons]="isStock" (eventFooter)="enviar()"></spa-footer>

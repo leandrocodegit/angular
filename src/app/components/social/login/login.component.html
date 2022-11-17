@@ -1,0 +1,23 @@
+<div id="eventBT"  (click)="redirect()"></div>
+<spa-top></spa-top>
+<div id="box">
+  <div class="row">
+    <div class="col p-3">
+      <p class="display-6 text-center" style="color:#7790a9">Faça login para continuar</p>
+    </div>
+    <div class="col d-flex justify-content-center p-2">
+      <div id="buttonDiv"></div>
+    </div>
+    <div class="col d-flex justify-content-center p-2" style="display: inline-block;">
+      <div class="fb-login-button" 
+        data-width="250" 
+        data-size="large" 
+        data-button-type="continue_with"
+        data-layout="rounded" 
+        data-auto-logout-link="false" 
+        data-use-continue-as="true"></div>
+    </div>
+  </div>
+</div> 
+<spa-footer [nameButton]="'Voltar'" (eventFooter)="enviar()"></spa-footer>
+ 

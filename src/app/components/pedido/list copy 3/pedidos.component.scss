@@ -1,0 +1,27 @@
+@use "@material/list";
+@use "@material/ripple";
+
+@include list.deprecated-core-styles; 
+
+li{
+    border-bottom: solid #eeeeee 0.01rem;
+}
+
+.mdc-deprecated-list-item__primary-text{
+    font-family: 'Readex Pro', sans-serif !important;
+    color: #434343;
+}
+
+.mdc-drawer__content{
+    margin-bottom: 10%;
+}
+
+.mdc-drawer--dismissible{
+    width: 100%;
+}
+
+button{
+    width: 100%;
+    max-width: 220px;   
+  }
+  

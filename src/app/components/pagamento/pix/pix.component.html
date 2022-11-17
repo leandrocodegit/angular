@@ -1,0 +1,26 @@
+
+<spa-load *ngIf="isLoad"></spa-load>  
+<div *ngIf="!isLoad" class="container p-4">
+    <img src="assets/img/pix.png" class="rounded mx-auto d-block" style="width:35%">
+</div>
+<div class="container" style="padding-bottom: 10%;">
+    <div *ngIf="!isLoad" class="container mt-3 text-center">
+        <div class="container">
+            <img class="img-fluid mx-auto d-block image"
+                src="data:image/png;base64,{{pedido.pagamento.qrCodeBase64}}"
+                style="width: 100%">
+        </div>
+        <div class="container">
+            <div class="row text-secondary"> 
+                    <img src="assets/img/desconto.png" class="rounded mx-auto d-block" style="width:72px"> 
+            </div>
+            <div class="mt-2">
+                
+                    <p style="letter-spacing: 2px;">Uma boa, pois você garante um descontinho pagando com pix.</p>
+            </div> 
+        </div>
+    </div>
+</div>
+<spa-footer [nameButton]="nameButton" [color]="color" [isView]="isView" [isConfirmar]="isConfirma" [isViewCest]="false" (eventVoltar)="voltar()"
+    (eventConfirmarSim)="sim()" (eventConfirmarNao)="nao()" (eventFooter)="enviar()">
+</spa-footer>

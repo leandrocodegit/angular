@@ -1,0 +1,25 @@
+.svg{
+    position: absolute;
+    color: #e7dc92;
+    margin-right: 2px;
+    right: 0;
+    font-size: 42px;
+}
+
+.svg2{
+    padding-top: 11px;
+    position: absolute;
+    color: #ffe3e3;
+    margin-left: 4px;
+    left: 0;
+    font-size: 50px;
+}
+.svg {
+    padding-top: 15px;
+    font-variation-settings:
+        'FILL' 1
+}
+
+
+
+ 

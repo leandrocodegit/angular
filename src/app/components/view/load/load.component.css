@@ -1,0 +1,14 @@
+.box-center{
+    color: #5da0ecbb; 
+}
+.box span{
+    font-size: 11px;
+}
+.spinner{    
+     width: 100px;
+     height: 100px;
+     stroke-width: 1%!important;
+     --bs-spinner-animation-speed: 0.85s!important;
+     margin: auto;
+     padding: auto;
+}

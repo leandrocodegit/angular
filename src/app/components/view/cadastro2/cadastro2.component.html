@@ -1,0 +1,192 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+
+<div id="frame" *ngIf="!isLoad" class="was-validated form-group box-top">
+    <div class="card-body p-3" id="dados">         
+        <div class="col-md-4"> 
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="email-text">Email:</span>
+                <input disabled [(ngModel)]="usuario.email" id="email" class="mdc-text-field__input" type="text" aria-labelledby="nome-text"
+                    pattern="^[a-zA-Z ]*$" required>
+                <span class="mdc-line-ripple"></span>            
+            </label>
+        </div>
+        <div id="nome" class="col-md-4">
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="nome-text">Nome completo</span>
+                <input [(ngModel)]="usuario.nome" class="mdc-text-field__input" id="nome" autocomplete="off" type="text" aria-labelledby="nome-text"
+                    pattern="^[a-zA-Z ]*$" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="celular-text">Celular</span>
+                <input (keyup)="validate('contato')" [(ngModel)]="usuario.contato" id="celular" class="mdc-text-field__input" autocomplete="off" type="tel" aria-labelledby="celular-text"
+                    pattern="[1-9]{1}[0-9][0-9]{9}" data-inputmask="'mask': '(999) 999-9999'" required>
+                <span class="mdc-line-ripple"></span>
+            </label>
+        </div>
+        <div class="col-md-4">
+            <label class="mdc-text-field mdc-text-field--filled">
+                <span class="mdc-text-field__ripple"></span>
+                <span class="mdc-floating-label" id="cpf-text">CPF:</span>
+                <input (keyup)="validate('cpf')" [(ngModel)]="usuario.documento" id="cpf" class="mdc-text-field__input" autocomplete="off" type="tel" aria-labelledby="cpf-text"
+                    pattern="[0-9]{1}[0-9][0-9]{9}" required />
+                    <span (click)="setLetras()" *ngIf="!isValidCPF" class="material-symbols-outlined text-danger">
+                        error 
+                        </span> 
+                <span class="mdc-line-ripple"></span>
+            </label>
+        </div>
+        <div id="endereco" class="p-3 text-secondary">
+           <p class="h6 text-center">Endereço de entrega</p>
+        </div>
+        <!-- Endereço do cliente -->
+        <div class="card-body ">
+            <div class="col-md-4"> 
+                <label class="mdc-text-field mdc-text-field--filled">                     
+                    <span class="mdc-text-field__ripple"></span>                    
+                    <span class="mdc-floating-label" id="cep-text">Cep:</span>
+                    <input [(ngModel)]="usuario.endereco_principal.cep" id="cep" type="tel" #input (keyup)="buscaCep(input.value)" autocomplete="off" minlength="8" maxlength="8" class="mdc-text-field__input" type="tel" aria-labelledby="cep-text"
+                         required />
+                    <span class="mdc-line-ripple"></span>                    
+                </label>
+            </div>
+            <div class="col-md-4">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="numero-text">Numero:</span>
+                    <input (keyup)="validate('numero')" [(ngModel)]="usuario.endereco_principal.numero" id="numero" class="mdc-text-field__input" autocomplete="off"  type="{{isLetras ? 'text' : 'tel'}}" aria-labelledby="numero-text"
+                        required />
+                    <span class="mdc-line-ripple"></span>
+                    <span (click)="setLetras()" *ngIf="isLetras" class="material-symbols-outlined">
+                        sort_by_alpha
+                        </span>
+                        <span (click)="setLetras()" *ngIf="!isLetras" class="material-symbols-outlined">
+                            123
+                            </span>
+                </label> 
+            </div>
+            <div class="col-md-4">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="complemento">Complemento:</span>
+                    <input (keyup)="validate('complemento')" [(ngModel)]="usuario.endereco_principal.complemento" class="mdc-text-field__input" autocomplete="off" type="text"  aria-labelledby="complemento"
+                        required />
+                    <span class="mdc-line-ripple"></span>
+                </label>  
+            </div>
+            <div id="rua" class="col-md-4">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="rua">Rua:</span>
+                    <input (keyup)="validate('rua')" [(ngModel)]="usuario.endereco_principal.logradouro" class="mdc-text-field__input" autocomplete="off" type="text"  aria-labelledby="rua"
+                         required />
+                    <span class="mdc-line-ripple"></span>
+                </label> 
+            </div>
+            <div id="bairro" class="col-md-4">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="bairro">Bairro:</span>
+                    <input (keyup)="validate('bairro')" [(ngModel)]="usuario.endereco_principal.bairro" class="mdc-text-field__input" autocomplete="off" type="text" aria-labelledby="bairro"
+                         required />
+                    <span class="mdc-line-ripple"></span>
+                </label>  
+            </div>
+            <div id="cidade" class="col-md-4">
+                <label class="mdc-text-field mdc-text-field--filled">
+                    <span class="mdc-text-field__ripple"></span>
+                    <span class="mdc-floating-label" id="cidade">Cidade:</span>
+                    <input (keyup)="validate('cidade')" [(ngModel)]="usuario.endereco_principal.localidade" class="mdc-text-field__input" autocomplete="off" type="text" aria-labelledby="cidade"
+                         required />
+                    <span class="mdc-line-ripple"></span>
+                </label>   
+            </div>
+            <div id="uf" class="col-md-4">
+                <div class="mdc-select mdc-select--filled mdc-select--required">
+                    <div class="mdc-select__anchor" aria-required="true">
+                      <span class="mdc-select__ripple"></span>
+                      <span class="mdc-floating-label">Estado</span>
+                      <span class="mdc-select__selected-text-container">
+                        <span class="mdc-select__selected-text"></span>
+                      </span>
+                      <span class="mdc-select__dropdown-icon">
+                        <svg
+                            class="mdc-select__dropdown-icon-graphic"
+                            viewBox="7 10 10 5" focusable="false">
+                          <polygon
+                              class="mdc-select__dropdown-icon-inactive"
+                              stroke="none"
+                              fill-rule="evenodd"
+                              points="7 10 12 15 17 10">
+                          </polygon>
+                          <polygon
+                              class="mdc-select__dropdown-icon-active"
+                              stroke="none"
+                              fill-rule="evenodd"
+                              points="7 15 12 10 17 15">
+                          </polygon>
+                        </svg>
+                      </span>
+                      <span class="mdc-line-ripple"></span>
+                    </div>
+                  
+                    <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+                        <ul class="mdc-deprecated-list">  
+                          <li class="mdc-deprecated-list-item" data-value="DF">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Distrito Federal</span>
+                          </li>
+                          <li class="mdc-deprecated-list-item" data-value="ES">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Espírito Santo</span>
+                          </li>
+                          <li class="mdc-deprecated-list-item" data-value="GO">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Goiás</span>
+                          </li> 
+                          <li class="mdc-deprecated-list-item" data-value="MT">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Mato Grosso</span>
+                          </li>
+                          <li class="mdc-deprecated-list-item" data-value="MS">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Mato Grosso do Sul</span>
+                          </li>
+                          <li class="mdc-deprecated-list-item" data-value="MG">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Minas Gerais</span>
+                          </li> 
+                          <li class="mdc-deprecated-list-item" data-value="PR">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Paraná</span>
+                          </li> 
+                          <li class="mdc-deprecated-list-item" data-value="RJ">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Rio de Janeiro</span>
+                          </li> 
+                          <li class="mdc-deprecated-list-item" data-value="RS">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Rio Grande do Sul</span>
+                          </li> 
+                          <li class="mdc-deprecated-list-item" data-value="SC">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">Santa Catarina</span>
+                          </li>
+                          <li class="mdc-deprecated-list-item" data-value="SP">
+                            <span class="mdc-deprecated-list-item__ripple"></span>
+                            <span class="mdc-deprecated-list-item__text">São Paulo</span>
+                          </li> 
+                        </ul>
+                      </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <spa-footer [alerta]="alerta"  (eventAlterar)="alterar()" [nameButton]="nameButton" [isView]="isOpens" [isView]="isViewIcons"
+        [color]="color" (eventFooter)="enviar()" (eventSheet)="openSheet()"></spa-footer>

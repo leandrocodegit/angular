@@ -1,0 +1,21 @@
+@use "@material/list";
+@use "@material/ripple";
+@use "@material/drawer"; 
+
+@include drawer.core-styles;
+@include drawer.dismissible-core-styles;
+@include drawer.modal-core-styles;
+@include list.deprecated-core-styles;
+
+.mdc-deprecated-list{
+    width: 100%;
+}
+
+li{
+    border-bottom: solid #eeeeee 0.01rem;
+}
+
+.mdc-deprecated-list-item__primary-text{
+    font-family: 'Readex Pro', sans-serif !important;
+    color: #434343;
+}

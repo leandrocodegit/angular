@@ -1,0 +1,34 @@
+<div class="fixed-bottom" [class.valido]="alerta == 1"  [class.invalido]="alerta == 2">
+  <div class="p-2">
+    <div *ngIf="isViewIcons" class="row">
+      <div class="col">
+        <a *ngIf="!isChange" (click)="scan()" [ngStyle]="{'color':colorIcons}">
+          <!-- scan -->
+          <i class="material-symbols-outlined">&#xf206;</i>
+        </a>
+        <a *ngIf="isChange" (click)="voltar($event)" [ngStyle]="{'color':colorIcons}">
+          <!-- back -->
+          <i class="material-symbols-outlined">&#xe15e;</i> 
+        </a>
+      </div>
+      <div class="col d-flex justify-content-center">
+        <a (click)="openBottomSheet()" [ngStyle]="{'color':colorIcons}">
+          <!-- center -->
+          <i class="material-symbols-outlined">&#xe936;</i>
+        </a>
+      </div>
+      <div class="col d-flex justify-content-end" style="padding-right: 22px!important">
+        <a *ngIf="isViewCest" routerLink="/cart" [ngStyle]="{'color':colorIcons}">
+          <!-- bag -->
+          <i class="material-symbols-outlined">&#xf1cc;</i>
+          <span
+            class="position-absolute top-0 translate-middle badge bg-amarelo">{{service.findPedido().itens}}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <spa-botao-enviar [alerta]="alerta" [color]="color" *ngIf="isView" [name]="nameButton" (eventButton)="enviar($event)">
+  </spa-botao-enviar>
+  <spa-botao-confimar *ngIf="isConfirmar" (eventConfirmarSim)="sim($event)" (eventConfirmarNao)="nao($event)">
+  </spa-botao-confimar>
+</div>

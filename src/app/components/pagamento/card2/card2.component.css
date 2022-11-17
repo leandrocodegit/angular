@@ -1,0 +1,24 @@
+.mdc-text-field, .mdc-text-field-helper-line, .mdc-text-field--filled, .mdc-select--filled, .mdc-select__anchor{
+    background-color: #fcfcfc!important;
+    border-radius: 7px 7px 0 0!important;
+    height: 55px!important;
+    width: 100%!important; 
+    margin-top: 4px;
+}
+b{
+    font-weight: 100;
+    font-family: 'Readex Pro', sans-serif !important;
+    font-size: 18px; 
+    vertical-align: super; 
+    margin-left: 12px;
+    color: gray;
+}
+
+li{
+    padding-left: 0!important;
+    display: block!important;
+}
+
+.close{
+    display: none;
+}

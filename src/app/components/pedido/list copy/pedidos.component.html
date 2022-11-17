@@ -1,0 +1,30 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<div class="box-top" *ngIf="!isLoad">
+<ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-deprecated-list--avatar-list">
+    <div *ngFor="let pedido of pedidos">
+        <li class="mdc-deprecated-list-item" tabindex="0">
+            <span class="mdc-list-item__graphic material-icons mdc-deprecated-list--avatar-list"></span>
+            <span class="mdc-deprecated-list-item__ripple"></span>
+            <span class="mdc-deprecated-list-item__text">
+                <span class="mdc-deprecated-list-item__primary-text">Nº {{pedido.identificador}}</span>
+                <span class="mdc-deprecated-list-item__secondary-text" 
+                    [style.color]="pedido.status == 'CONFIRMADO' ? '#7ae9ff' : 'class'"
+                    [style.color]="pedido.status == 'PAY' ? '#ffcf73' : 'class'"
+                    [style.color]="pedido.status == 'PENDENTE' ? '#ffcf73' : 'class'"
+                    [style.color]="pedido.status == 'ENTREGUE' ? '#17ff03' : 'class'"
+                    [style.color]="pedido.status == 'CANCELADO' ? '#ff5959' : 'class'">{{this.tradutor.traduzirString(pedido.status)}}</span>
+            </span>
+            <span aria-hidden="true" class="mdc-deprecated-list-item__meta">
+                <!---->
+                <!---->
+                <span class="material-symbols-outlined mdc-deprecated-list--icon-list float-end" aria-hidden="true">
+                    more_vert
+                </span>
+            </span>
+        </li>
+    </div>
+</ul>
+</div>
+<spa-footer [nameButton]="nameButton" [isConfirmar]="isConfirmar" [isView]="!isConfirmar" (eventConfirmarSim)="sim()"
+  (eventFooter)="enviar()"></spa-footer>

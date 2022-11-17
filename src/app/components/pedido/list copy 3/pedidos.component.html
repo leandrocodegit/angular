@@ -1,0 +1,140 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+
+<body>
+  <aside class="mdc-drawer mdc-drawer--dismissible mdc-top-app-bar--fixed-adjust">
+    <div class="mdc-drawer__content">
+      <div class="mdc-deprecated-list">
+        <div class="container" style="margin-bottom: 25%;"> 
+          <ul class="list-group ">
+            <li class="list-group-item">
+              Criado
+              <span class="float-end">{{ pedidoSelect.dataPedido | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+            </li>
+            <li class="list-group-item">
+              Atualizado
+              <span class="float-end">{{ pedidoSelect.ultimaAtualizacao | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+            </li>
+            <li *ngIf="pedidoSelect.status == 'CANCELADO'" class="list-group-item">
+              Cancelado
+              <span class="float-end">{{ pedidoSelect.dataCancelamento | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+            </li>
+            <li class="list-group-item">
+              Pagamento
+              <span class="float-end">{{this.tradutor.traduzirString(pedidoSelect.pagamento.metodoPagamento)}}</span>
+            </li>
+            <li class="list-group-item">
+              Parcelas
+              <span class="float-end">{{pedidoSelect.pagamento.parcelas == 1 ? 'à vista' : 'x' +
+                pedidoSelect.pagamento.parcelas}}</span>
+            </li>
+            <li class="list-group-item">
+              Status
+              <span class="float-end">{{this.tradutor.traduzirString(pedidoSelect.status)}}</span>
+            </li>
+            <li class="list-group-item">
+              Desconto pagamento
+              <span class="float-end">{{pedidoSelect.pagamento.descontos | moeda}}</span>
+            </li>
+            <li class="list-group-item">
+              Desconto
+              <span class="float-end">{{pedidoSelect.desconto | moeda}}</span>
+            </li>
+          </ul>
+          <ul class="list-group">
+            <li class="list-group-item h5 text-primary" [class.text-danger]="pedidoSelect.status == 'CANCELADO'">
+              Total
+              <span class="float-end">{{pedidoSelect.pagamento.total | moeda}}</span>
+            </li>
+          </ul>
+          <br>
+          <p class="text-center text-secondary">Produtos do pedidos</p>
+          <ul *ngFor="let produto of pedidoSelect.produtos" class="list-group">
+            <li class="list-group-item">
+              <img class="img-fluid mx-auto d-block image"
+                src="{{HOST}}/produto/imagem/{{produto.qrcode.produto.codigo}}/60/0" style="width: 35px">
+            </li>
+            <li class="list-group-item">
+              Codigo
+              <span class="float-end">{{produto.qrcode.produto.codigo}}</span>
+            </li>
+            <li class="list-group-item">
+              Quantidade
+              <span class="float-end">{{produto.quantidade}}</span>
+            </li>
+            <li class="list-group-item">
+              Valor unitário
+              <span class="float-end">{{produto.qrcode.preco | moeda}}</span>
+            </li>
+            <li class="list-group-item">
+              Total
+              <span [class.text-decoration-line-through]="pedidoSelect.status == 'CANCELADO'"
+                class="float-end">{{produto.qrcode.preco * produto.quantidade | moeda}}</span>
+            </li>
+          </ul>
+          <br>
+          <p class="text-center text-secondary">Dados de entrega</p>
+          <ul class="list-group">
+            <li class="list-group-item">
+              {{pedidoSelect.usuario.nome}}
+            </li>
+            <li class="list-group-item">
+              <span>{{pedidoSelect.usuario.endereco_principal | endereco}}</span>
+            </li>
+          </ul>
+          <br>
+          <div *ngIf="pedidoSelect.status != 'CANCELADO'" class="row">
+            <div *ngIf="pedidoSelect.status == 'PENDENTE' || pedidoSelect.status == 'PAY'" class="col p-3"
+              style="width: 33%">
+              <div (click)="pagar(pedidoSelect)" class="text-secondary text-center">
+                <button type="button" class="bt-primary button-person bg-warning">Pagar</button>
+              </div>
+            </div>
+            <div *ngIf="pedidoSelect.pagamento.status == 'approved'" class="col p-3" style="width: 33%">
+              <div (click)="devolver(pedidoSelect)" class="text-secondary text-center">
+                <button type="button" class="bt-primary button-person">Devolver</button>
+              </div>
+            </div>
+            <div *ngIf="pedidoSelect.pagamento.status == 'approved'" class="col p-3" style="width: 33%">
+              <div (click)="refazer(pedidoSelect)" class="text-secondary text-center">
+                <button type="button" class="bt-primary button-person">Refazer</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="box-top" *ngIf="!isLoad">
+    <ul class="mdc-deprecated-list mdc-deprecated-list--two-line mdc-deprecated-list--avatar-list">
+      <div *ngFor="let pedido of pedidos">
+        <li (click)="open(pedido)" data-bs-toggle="collapse" data-bs-target="#demo"
+          class="mdc-deprecated-list-item mdc-deprecated-list-divider" role="separator" tabindex="0"> 
+          <span class="mdc-deprecated-list-item__ripple"></span>
+          <span class="mdc-deprecated-list-item__text">
+            <span class="mdc-deprecated-list-item__primary-text">Nº {{pedido.identificador}}</span>
+            
+            <span class="mdc-deprecated-list-item__secondary-text"
+              [style.color]="pedido.status == 'CONFIRMADO' ? '#7ae9ff' : 'class'"
+              [style.color]="pedido.status == 'PAY' ? '#ffcf73' : 'class'"
+              [style.color]="pedido.status == 'PENDENTE' ? '#ffcf73' : 'class'"
+              [style.color]="pedido.status == 'ENTREGUE' ? '#17ff03' : 'class'"
+              [style.color]="pedido.status == 'CANCELADO' ? '#ff5959' : 'class'">{{this.tradutor.traduzirString(pedido.status)}}</span>
+          </span>
+          <span aria-hidden="true" class="mdc-deprecated-list-item__meta"> 
+            {{ pedido.dataPedido | date: 'dd/MM/yyyy hh:mm:ss'}}
+          </span>
+          <span aria-hidden="true" class="mdc-deprecated-list-item__meta"> 
+            <span class="material-symbols-outlined mdc-deprecated-list--icon-list float-end" aria-hidden="true">
+              more_vert
+            </span>
+          </span>
+          
+        </li>
+      </div>
+    </ul>
+  </div>
+
+</body>
+<spa-footer [nameButton]="nameButton" [isChange]="drawer.open" [isConfirmar]="isConfirmar" [isView]="!isConfirmar" (eventVoltar)="voltar()" (eventConfirmarSim)="sim()"
+  (eventFooter)="enviar()"></spa-footer>

@@ -1,0 +1,21 @@
+<spa-top></spa-top>
+<div id="forma-pagamento" class="container mt-3">
+    <div class="row container">
+        <p class="text-center readex h5" style="color:#93c9ff">Escolha  forma de pagamento</p>
+        <div class="col-sm-12 p-2">
+            <div class="card p-2">
+                <a (click)="pay('pix')">
+                <img src="assets/img/pix.png" class="rounded mx-auto d-block"  style="width:50%">
+                </a>
+            </div>
+        </div>
+        <div class="col-sm-12 p-2">
+            <div class="card p-2">
+                <a (click)="pay('card')">
+                <img src="assets/img/card.png" class="rounded mx-auto d-block" style="width:80%">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<spa-footer [nameButton]="'Voltar ao carrinho'" (eventFooter)="enviar()"></spa-footer>

@@ -1,0 +1,56 @@
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+
+
+@use "@material/list/mdc-list";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+@use "@material/select/styles";
+
+
+@mixin mdc-text-field-outline-color($color) {
+    background-color: red($color: #000000);
+}
+
+ 
+ 
+@include textfield.core-styles; 
+ 
+@mixin mdc-text-field-outline-color() {
+    & {
+        &.mdc-text-field--focused {
+            border-color: blue;
+            background-color: red;
+            
+          }
+      &.mdc-text-field--focused {
+        border-color: blue;
+        
+      }
+      &.mdc-text-field--invalid {
+        border-color: gray;
+      }
+      &:not(.mdc-text-field--focused) {
+        border-color: black;
+      }
+    }
+  }
+
+  .mdc-text-field__input {
+    &:-webkit-autofill {
+      ~ .mdc-notched-outline {
+  
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__trailing {
+          box-shadow: -16px 0 0 0 inset rgb(232, 240, 254);
+        }
+        .mdc-notched-outline__notch {
+          box-shadow: 4px 0 0 0 inset rgb(232, 240, 254);
+        }
+    }
+  }
+}
+
+ 

@@ -1,0 +1,8 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<div id="eventBT" (click)="redirec()"></div>
+
+<canvas id="canvas" width="500"></canvas>
+<div id="icon" class="d-flex justify-content-center"> 
+  <img src="assets/img/scan-load.gif" class="rounded mx-auto d-block"  style="width:50%">
+</div>
+<spa-footer [nameButton]="'Voltar'" [isViewCest]="isViewIcons" [isView]="false" [color]="'#fccf07aa'" [colorIcons]="'#fccf07'" (eventVoltar)="voltar()" (eventFooter)="enviar()"></spa-footer>

@@ -1,0 +1,10 @@
+.box-detalhes h3{
+    padding: 12px; 
+}
+.box-detalhes b{
+    float: right;
+    color: #2f2f2f;
+}
+li{
+    font-family: 'Arial', sans-serif;;
+}

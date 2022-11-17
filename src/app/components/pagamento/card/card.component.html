@@ -1,0 +1,100 @@
+<spa-top></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<!-- Payment -->
+<spa-load *ngIf="isLoad"></spa-load>
+<section [class.close]="isLoad" class="payment-form dark box-top">    
+    <div id="div" class="container__payment" style="margin-bottom: 30%;">
+        <div class="payment-details">
+            <div id="form-checkout" class="was-validated form-group">
+                <div class="hidden">
+                    <input [(ngModel)]="formulario.email" required id="form-checkout__cardholderEmail"
+                        name="cardholderEmail" type="email" class="form-control" />
+                </div>
+                <div class="container" style="width: 95%; padding-top: 15px;">
+                    <div class="mb-3">
+                        <label for="form-checkout__cardholderName" class="form-label">CPF</label>
+                        <input (keyup)="validate('documento')" [(ngModel)]="formulario.documento"  required pattern="[0-9]{1}[0-9][0-9]{9}"
+                            id="form-checkout__identificationNumber" name="docNumber" type="tel" class="form-control" /> 
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-checkout__cardholderName" class="form-label">Nome do
+                            titular</label>
+                        <input (keyup)="validate('nomeCartao')" [(ngModel)]="formulario.nomeCartao" name="cardholderName" minlength="10" required type="text"
+                            class="form-control" id="form-checkout__cardholderName" pattern="^[a-zA-Z ]*$" placeholder="Igual do cartão" />
+                    </div>
+                    <div class="mb-3">
+                        <label id="token" for="form-checkout__cardNumber" class="form-label">Numero do
+                            cartão</label>
+                        <input id="form-checkout__cardNumber" type="hidden" />
+                        <input (keyup)="validate('cartao')" [(ngModel)]="formulario.cartao" id="numeroCartao" pattern="[0-9\s]{13,19}" required
+                            name="numeroCartao" type="tel" class="form-control" />
+                        <div class="hidden">
+                            <label for="numeroCartao" generated="false" class="error"></label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="form-checkout__cardExpirationMonth" class="form-label">Validade</label>
+                        <div class="input-group">
+                            <span class="input-group-text" style="color:#bec1c5">Mês</span>
+                            <input (keyup)="validate('mes')" [(ngModel)]="formulario.mes"  id="form-checkout__cardExpirationMonth" pattern="(0[1-9]|1[012])"
+                                required name="cardExpirationMonth" type="tel" class="form-control is-valid"
+                                placeholder="00" />
+                            <div class="hidden">
+                                <label for="form-checkout__cardExpirationMonth" generated="false" class="error"></label>
+                            </div>
+                            <span class="input-group-text" style="color:#bec1c5">Ano</span>
+                            <input (keyup)="validate('ano')" [(ngModel)]="formulario.ano" id="form-checkout__cardExpirationYear" pattern="[2-9][0-9]{1}"
+                                required name="cardExpirationYear" type="tel" class="form-control is-valid"
+                                placeholder="00" />
+                            <div class="hidden">
+                                <label for="form-checkout__cardExpirationYear" generated="false" class="error"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex">
+                            <div class="flex-fill">
+                                <label for="form-checkout__securityCode" class="form-label">Codigo de
+                                    segurança</label>
+                                <input (keyup)="validate('cvv')" [(ngModel)]="formulario.cvv" id="form-checkout__securityCode" pattern="[0-9]{3}" required
+                                    name="securityCode" type="tel" class="form-control" placeholder="CVV"
+                                    style="width:170px">
+                            </div>
+                            <div class="flex-fill">
+                                <div style="float: right;">
+                                    <img id="bandeira" src="">
+                                </div>
+                            </div>
+                        </div>
+                        
+                         
+                    </div>
+
+
+                    <div id="issuerInput" class="form-group col-sm-12 hidden">
+                        <select id="form-checkout__issuer" name="issuer" required class="form-control"></select>
+                    </div>
+                    <label for="form-checkout__securityCode" class="form-label">Opções de parcelamento</label>
+                    <div class="form-group col-sm-12">
+                        <select (change)="validate('parcelas')" [(ngModel)]="formulario.installments" id="form-checkout__installments" name="installments" type="text" class="form-control">
+                        </select>
+                    </div>
+                    <div class="form-group col-sm-12" style="padding-bottom:30px">
+                        <input type="hidden" id="amount" value="0" [(ngModel)]="formulario.amount" />
+                        <input type="hidden" id="description" [(ngModel)]="formulario.descricao" />
+                        <p id="loading-message" style="color: #ff9e3a;padding: 15px;"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Result -->
+<!-- Result -->
+<div class="hidden"> 
+    <input id="transacao-id" type="hidden" class="fs-4 text-center" />
+    <input type="text" value="{{pedido.total}}" id="unit-price" /> 
+    </div>
+
+<spa-footer [isView]="isValid" [isViewIcons]="!isLoad" [nameButton]="nameButton" [color]="color" (eventVoltar)="voltar()" (eventFooter)="registraPedido()" (eventSheet)="openSheet()">
+</spa-footer>

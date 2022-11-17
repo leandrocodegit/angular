@@ -1,0 +1,108 @@
+<spa-top></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<!-- Payment -->
+<spa-load *ngIf="isLoad"></spa-load>
+<section [class.close]="isLoad" class="payment-form dark box-top">  
+            <div class="container" style="width: 95%; padding-top: 15px;">
+                <div class="mb-3">
+                    <label class="mdc-text-field mdc-text-field--filled">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label" id="cpf-text">CPF</span>
+                        <input (keyup)="validate('documento')" [(ngModel)]="formulario.documento"
+                            class="mdc-text-field__input" id="form-checkout__identificationNumber" autocomplete="off"
+                            type="tel" aria-labelledby="cpf-text" pattern="[0-9]{1}[0-9][0-9]{9}" required>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label class="mdc-text-field mdc-text-field--filled">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label" id="nome-text">Nome no cartão</span>
+                        <input (keyup)="validate('nomeCartao')" [(ngModel)]="formulario.nomeCartao"
+                            class="mdc-text-field__input" id="form-checkout__cardholderName" autocomplete="off"
+                            type="text" aria-labelledby="nome-text" pattern="^[a-zA-Z ]*$" required>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label class="mdc-text-field mdc-text-field--filled">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label" id="nome-text">Numero do cartão</span>
+                        <input (keyup)="validate('cartao')" [(ngModel)]="formulario.cartao"
+                            class="mdc-text-field__input" id="numeroCartao" autocomplete="off" type="tel"
+                            aria-labelledby="nome-text" pattern="[0-9\s]{13,19}" required>
+                        <span class="mdc-line-ripple float-end"><img id="bandeira" src=""></span>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col">
+                            <label class="mdc-text-field mdc-text-field--filled">
+                                <span class="mdc-text-field__ripple"></span>
+                                <span class="mdc-floating-label" id="cvv-text">Mês</span>
+                                <input (keyup)="validate('mes')" [(ngModel)]="formulario.mes"
+                                    class="mdc-text-field__input" id="form-checkout__cardExpirationMonth"
+                                    autocomplete="off" type="tel" aria-labelledby="cvv-text" pattern="(0[1-9]|1[012])"
+                                    required>
+                                <span class="mdc-line-ripple"></span>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label class="mdc-text-field mdc-text-field--filled">
+                                <span class="mdc-text-field__ripple"></span>
+                                <span class="mdc-floating-label" id="cvv-text">Ano</span>
+                                <input (keyup)="validate('ano')" [(ngModel)]="formulario.ano"
+                                    class="mdc-text-field__input" id="form-checkout__cardExpirationYear"
+                                    autocomplete="off" type="tel" aria-labelledby="cvv-text" pattern="[2-9][0-9]{1}"
+                                    required>
+                                <span class="mdc-line-ripple"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="mdc-text-field mdc-text-field--filled">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label" id="cvv-text">Codigo de segurança</span>
+                        <input (keyup)="validate('cvv')" [(ngModel)]="formulario.cvv" class="mdc-text-field__input"
+                            id="form-checkout__securityCode" autocomplete="off" type="tel" aria-labelledby="cvv-text"
+                            pattern="[0-9]{3}" required>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label class="mdc-text-field mdc-text-field--filled">
+                        <span class="mdc-text-field__ripple"></span>
+                        <span class="mdc-floating-label" id="cvv-text">Condição de pagamento</span>
+                        <input disabled [(ngModel)]="formulario.parcela.parcelas" class="mdc-text-field__input"
+                            id="form-checkout__securityCode" autocomplete="off" type="tel" aria-labelledby="cvv-text"
+                            pattern="[0-9]{3}" required>
+                        <span class="mdc-line-ripple"></span>
+                    </label>
+                </div>
+                <div id="parcelas" class="mt-3">
+                    <ul class="mdc-deprecated-list">
+                        <div *ngFor="let parcela of listaParcelas">
+                            <li (click)="setParcela(parcela)" [class.text-primary]="parcela.juros == 0"
+                                class="mdc-deprecated-list-item" tabindex="0">
+                                <span class="mdc-deprecated-list-item__ripple"></span>
+                                <span class="mdc-deprecated-list-item__secondary-text"
+                                    [class.text-warning]="parcela.juros == 0">{{parcela.juros == 0 ? 'Sem juros' :
+                                    parcela.juros | juros}}</span>
+                                <span class="mdc-deprecated-list-item__text">{{parcela | parcelas}}</span>
+                                <span class="float-end">{{parcela.totalAmount | moeda}}</span>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>  
+</section>
+<div class="hidden" style="visibility: hidden">
+    <input type="text" value="{{pedido.total}}" id="unit-price" />
+    <select (change)="validate('parcelas')" [(ngModel)]="formulario.installments" id="form-checkout__installments" name="installments" type="text" class="form-control">
+    </select>
+</div>
+
+<spa-footer [isView]="isValid" [isViewIcons]="!isLoad" [nameButton]="nameButton" [color]="color"
+    (eventVoltar)="voltar()" (eventFooter)="registraPedido()" (eventSheet)="openSheet()">
+</spa-footer>

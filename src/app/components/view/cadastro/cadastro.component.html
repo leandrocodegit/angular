@@ -1,0 +1,125 @@
+<spa-top></spa-top>  
+<spa-load *ngIf="isLoad"></spa-load>
+<div id="frame" *ngIf="!isLoad" class="was-validated form-group box-top">
+    <div  class="card-body p-3" id="dados">
+        <div class="col-md-4">
+            <label for="email" class="form-label text-secondary">Email:</label>
+            <input  disabled [(ngModel)]="usuario.email" type="email" autocomplete="off" class="form-control is-valid" id="email"
+                placeholder="Informe seu email" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div id="nome" class="col-md-4">
+            <label for="nome" class="form-label text-secondary">Nome completo:</label>
+            <input [(ngModel)]="usuario.nome" type="text" autocomplete="off" class="form-control is-valid" id="nome"
+                placeholder="Informe seu nome completo" pattern="^[a-zA-Z ]*$" required/>
+            <div class="valid-feedback"> 
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="celular" class="form-label text-secondary">Celular:</label>
+            <input (keyup)="validate('contato')" [(ngModel)]="usuario.contato" type="tel" autocomplete="off" class="form-control is-valid"
+                pattern="[1-9]{1}[0-9][0-9]{9}" data-inputmask="'mask': '(999) 999-9999'" id="celular"
+                placeholder="Celular de contato ou recado" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="cpf" class="form-label text-secondary">CPF:</label>
+            <input (keyup)="validate('cpf')" [(ngModel)]="usuario.documento" type="tel" autocomplete="off" class="form-control is-valid"
+                pattern="[0-9]{1}[0-9][0-9]{9}" id="cpf" placeholder="Informe seu cpf" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+    </div>
+    <div id="endereco" class="card-header h5 p-3 text-secondary">
+        <i class="material-symbols-outlined">&#xe558;</i> <b class="h6">Endereço de entrega</b> 
+    </div>
+    <!-- Endereço do cliente -->
+    <div class="card-body p-3">
+        <div  class="col-md-4">
+            <label for="cep" class="form-label text-secondary">CEP:</label> 
+            <input [(ngModel)]="usuario.endereco_principal.cep" type="tel" #input (keyup)="buscaCep(input.value)"
+                class="form-control is-valid" minlength="8" id="cep" placeholder="Informe seu Cep" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="numero" class="form-label text-secondary">Numero:</label>
+            <div class="row">
+                <div class="col-7">
+                    <input (keyup)="validate('numero')" [(ngModel)]="usuario.endereco_principal.numero" type="{{isLetras ? 'text' : 'tel'}}" class="form-control is-valid" id="numero"
+                    placeholder="Numero" required /> 
+                </div>
+                <div class="col-5"> 
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="isLetras" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        <label class="form-check-label" for="flexSwitchCheckDefault">Letras</label>
+                      </div>
+              </div>           
+            </div>
+        </div>
+        <div  class="col-md-4">
+            <label for="complemento" class="form-label text-secondary">Complemento:</label>
+            <input (keyup)="validate('complemento')" [(ngModel)]="usuario.endereco_principal.complemento" type="text" class="form-control" id="complemento" style="background-image: none;"/> 
+        </div>
+        <div id="rua" class="col-md-4">
+            <label for="rua" class="form-label text-secondary">Rua:</label>
+            <input (keyup)="validate('rua')" [(ngModel)]="usuario.endereco_principal.logradouro" type="text" class="form-control is-valid" id="rua"
+                placeholder="Rua ou avenida" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div id="bairro" class="col-md-4">
+            <label for="bairro" class="form-label text-secondary">Bairro:</label>
+            <input (keyup)="validate('bairro')" [(ngModel)]="usuario.endereco_principal.bairro" type="text" class="form-control is-valid" id="bairro"
+                placeholder="Bairro" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div id="cidade" class="col-md-4">
+            <label for="cidade" class="form-label text-secondary">Cidade:</label>
+            <input (keyup)="validate('cidade')" [(ngModel)]="usuario.endereco_principal.localidade" type="text" class="form-control is-valid" id="cidade"
+                placeholder="cidade" required/>
+            <div class="valid-feedback">
+            </div>
+        </div>
+        <div id="uf" class="col-md-4"> 
+            <label for="uf" class="form-label text-secondary">Estado:</label>
+            <select (keyup)="validate('uf')" [(ngModel)]="usuario.endereco_principal.uf" required class="form-select" id="uf"
+                aria-label="Default select example">
+                <option selected disabled value="">Selecione o estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select>
+            <div class="valid-feedback">
+            </div>
+        </div>
+    </div> 
+</div> 
+<spa-footer [alerta]="alerta" (eventAlterar)="alterar()" [nameButton]="nameButton" [isView]="isOpens" [color]="color" (eventFooter)="enviar()" (eventSheet)="openSheet()"></spa-footer>

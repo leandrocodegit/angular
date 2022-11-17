@@ -1,0 +1,16 @@
+ 
+ .material-symbols-outlined {
+    font-size: 27px;
+}
+
+.row{
+    box-shadow: -1px 1px 2px rgb(223 223 223);
+}
+
+.col{
+    padding-top: 7px;
+}
+
+.total{
+    font-size: 14px;
+}

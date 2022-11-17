@@ -1,0 +1,148 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Oswald:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mitr:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cambay&family=Mitr:wght@300&family=Play&family=Readex+Pro:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+html{
+    user-select: none;
+}
+
+.font-padrao {
+    font-family: 'Comfortaa', cursive;
+}
+
+.font-botao {
+    font-family: 'Readex Pro', sans-serif;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    background-color: black;
+}
+
+.readex {
+    font-family: 'Readex Pro', sans-serif;
+}
+
+p,
+input {
+    font-family: 'Readex Pro', sans-serif !important;
+    letter-spacing: 1.5px;
+}
+
+label {
+    font-family: 'Cambay', sans-serif;
+    letter-spacing: 1px;
+    margin-bottom: 4px !important
+}
+
+.botao {
+    line-height: 1.9 !important;
+    letter-spacing: 1px;
+    font-family: 'Roboto', sans-serif;
+
+    height: 69px;
+}
+
+.button-person {
+    background-color: #45dde9;
+    color: white;
+    border: none;
+    border-radius: 50px !important;
+    height: 40px;
+    width: 220px;
+    font-size: 16px;
+    font-family: monospace;
+}
+
+.price {
+    letter-spacing: 1.0px;
+}
+
+.mat-bottom-sheet-container {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.box-top {
+    padding-top: 35px;
+    padding-bottom: 35%; 
+}
+
+.box-center{ 
+    width: 100vw;
+    height: 90vh; 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+}
+
+.box-detalhes {
+    font-family: 'Comfortaa', cursive;
+    padding-bottom: 40%;
+    padding-top: 10px;
+    font-size: 16px;
+}
+
+.box-detalhes h3 {
+    padding: 12px;
+}
+
+.box-detalhes b {
+    float: right;
+    color: #0066ff;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+        'FILL' 0,
+        'wght' 200,
+        'GRAD' 0,
+        'opsz' 48
+}
+
+.material-symbols-outlined:hover {
+    color: #fdcf06; 
+}
+
+.material-symbols-outlined {
+    font-size: 36px;
+}
+
+.smart {
+    font-size: 32px;
+}
+
+.big {
+    font-size: 128px;
+}
+
+.big-big {
+    font-size: 256px;
+}
+
+.med {
+    font-size: 72px;
+}
+
+.text-titulo{
+    font-size: 15px;
+    font-family: 'Readex Pro', sans-serif !important;
+    color: #434343;
+}
+
+.b-icon{
+    font-weight: 100;
+    font-family: 'Readex Pro', sans-serif !important;
+    font-size: 18px; 
+    vertical-align: super; 
+    margin-left: 12px;
+}
+.bg-amarelo{
+   background-color: #fdcf06
+}
+
+.text-amarelo{
+    color: #fdcf06
+ }

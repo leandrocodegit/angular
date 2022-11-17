@@ -1,0 +1,89 @@
+<spa-top [setViewParceiro]="false"></spa-top>  
+<spa-load *ngIf="isLoad"></spa-load>
+<div class="container box-top" *ngIf="!isLoad">  
+        <p class="text-center text-secondary">Detalhes do pedido</p>  
+        <ul class="list-group">
+            <li class="list-group-item h5">
+                Nº
+                <span class="float-end">{{ pedido.identificador}}</span>
+              </li>
+          <li class="list-group-item">
+            Criado
+            <span class="float-end">{{ pedido.dataPedido | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+          </li>
+          <li class="list-group-item">
+            Atualizado
+            <span class="float-end">{{ pedido.ultimaAtualizacao | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+          </li>
+          <li class="list-group-item">
+            Pagamento
+            <span class="float-end">{{this.tradutor.traduzirString(pedido.pagamento.metodoPagamento)}}</span>
+          </li>
+          <li class="list-group-item">
+            Parcelas
+            <span class="float-end">{{pedido.pagamento.parcelas == 1 ? 'à vista' : 'x' +
+              pedido.pagamento.parcelas}}</span>
+          </li>
+          <li class="list-group-item">
+            Status
+            <span class="float-end">{{this.tradutor.traduzirString(pedido.status)}}</span>
+          </li>
+          <li class="list-group-item">
+            Desconto
+            <span class="float-end">{{pedido.desconto | moeda}}</span>
+          </li>
+        </ul>
+        <ul class="list-group">
+          <li class="list-group-item h5 text-primary">
+            Total
+            <span class="float-end">{{pedido.total | moeda}}</span>
+          </li>
+        </ul>
+        <br>
+        <p class="text-center text-secondary">Produtos do pedidos</p>
+        <ul *ngFor="let produto of pedido.produtos" class="list-group">
+          <li class="list-group-item">
+            <img class="img-fluid mx-auto d-block image"
+            src="{{HOST}}/produto/imagem/{{produto.qrcode.produto.codigo}}/60/0" style="width: 35px">
+          </li>
+          <li class="list-group-item">
+            Codigo
+            <span class="float-end">{{produto.qrcode.produto.codigo}}</span>
+          </li>
+          <li class="list-group-item">
+            Quantidade
+            <span class="float-end">{{produto.quantidade}}</span>
+          </li>
+          <li class="list-group-item">
+            Valor unitário
+            <span class="float-end">{{produto.qrcode.preco | moeda}}</span>
+          </li>
+          <li class="list-group-item">
+            Total
+            <span class="float-end">{{produto.qrcode.preco * produto.quantidade | moeda}}</span>
+          </li>
+        </ul>
+        <br>
+        <p class="text-center text-secondary">Endereço de retirada</p>
+        <ul class="list-group">
+          <li class="list-group-item">
+            {{pedido.usuario.nome}}
+          </li>
+          <li class="list-group-item">
+            <span>{{pedido.usuario.endereco_principal | endereco}}</span>
+          </li>
+        </ul>
+        <br> 
+        <p class="text-center h5 text-warning">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+            <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+          </svg>
+        </p>
+        <p class="text-center h5 text-warning"> 
+           Importante!
+        </p>
+        <p class="text-center h5 ">
+          A retirada será feita no endereço que foi entregue o pedido, então não precisa levar até a loja parceira.
+        </p>
+</div>
+  <spa-footer [nameButton]="nameButton" [isChange]="true" [isViewCest]="false" [isView]="!isConfirmar" [isConfirmar]="isConfirmar" [color]="color" (eventConfirmarNao)="nao()" (eventConfirmarSim)="sim()" (eventVoltar)="voltar()" (eventFooter)="enviar()"></spa-footer>

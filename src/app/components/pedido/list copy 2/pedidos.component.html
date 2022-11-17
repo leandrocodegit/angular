@@ -1,0 +1,129 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<div class="box-top" *ngIf="!isLoad">
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let pedido of pedidos" (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header class="container">
+        <mat-panel-title>
+          <div 
+          [class.bg-azul]="pedido.status == 'CONFIRMADO'"
+          [class.bg-warning]="pedido.status == 'PAY'"
+          [class.bg-verde]="pedido.status == 'ENTREGUE'"
+          [class.bg-vermelho]="pedido.status == 'CANCELADO'" class="icon">
+          </div>
+         <b        
+         [class.text-warning]="pedido.status == 'PAY'"    
+         [class.text-verde]="pedido.status == 'ENTREGUE'"
+         [class.text-vermelho]="pedido.status == 'CANCELADO'"  
+         style="margin: auto">Nº {{pedido.identificador}}</b> 
+        </mat-panel-title>
+        <mat-panel-description>
+          <b            
+          [class.text-warning]="pedido.status == 'PAY'"
+          [class.text-verde]="pedido.status == 'ENTREGUE'"
+          [class.text-vermelho]="pedido.status == 'CANCELADO'" style="margin: auto; ">{{this.tradutor.traduzirString(pedido.status)}}</b>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <p class="text-center text-secondary">Detalhes do pedido</p>
+
+      <ul class="list-group">
+        <li class="list-group-item">
+          Criado
+          <span class="float-end">{{ pedido.dataPedido | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+        </li>
+        <li class="list-group-item">
+          Atualizado
+          <span class="float-end">{{ pedido.ultimaAtualizacao | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+        </li>
+        <li *ngIf="pedido.status == 'CANCELADO'" class="list-group-item">
+          Cancelado
+          <span class="float-end">{{ pedido.dataCancelamento | date: 'dd/MM/yyyy hh:mm:ss'}}</span>
+        </li>
+        <li class="list-group-item">
+          Pagamento
+          <span class="float-end">{{this.tradutor.traduzirString(pedido.pagamento.metodoPagamento)}}</span>
+        </li>
+        <li class="list-group-item">
+          Parcelas
+          <span class="float-end">{{pedido.pagamento.parcelas == 1 ? 'à vista' : 'x' +
+            pedido.pagamento.parcelas}}</span>
+        </li>
+        <li class="list-group-item">
+          Status
+          <span class="float-end">{{this.tradutor.traduzirString(pedido.status)}}</span>
+        </li>
+        <li class="list-group-item">
+          Desconto pagamento
+          <span class="float-end">{{pedido.pagamento.descontos | moeda}}</span>
+        </li>
+        <li class="list-group-item">
+          Desconto
+          <span class="float-end">{{pedido.desconto | moeda}}</span>
+        </li>
+      </ul>
+      <ul class="list-group">
+        <li class="list-group-item h5 text-primary" [class.text-danger]="pedido.status == 'CANCELADO'">
+          Total
+          <span class="float-end">{{pedido.pagamento.total | moeda}}</span>
+        </li>
+      </ul>
+      <br>
+      <p class="text-center text-secondary">Produtos do pedidos</p>
+      <ul *ngFor="let produto of pedido.produtos" class="list-group">
+        <li class="list-group-item">
+          <img class="img-fluid mx-auto d-block image"
+            src="{{HOST}}/produto/imagem/{{produto.qrcode.produto.codigo}}/60/0" style="width: 35px">
+        </li>
+        <li class="list-group-item">
+          Codigo
+          <span class="float-end">{{produto.qrcode.produto.codigo}}</span>
+        </li>
+        <li class="list-group-item">
+          Quantidade
+          <span class="float-end">{{produto.quantidade}}</span>
+        </li>
+        <li class="list-group-item">
+          Valor unitário
+          <span class="float-end">{{produto.qrcode.preco | moeda}}</span>
+        </li>
+        <li class="list-group-item">
+          Total
+          <span [class.text-decoration-line-through]="pedido.status == 'CANCELADO'"
+            class="float-end">{{produto.qrcode.preco * produto.quantidade | moeda}}</span>
+        </li>
+      </ul>
+      <br>
+      <p class="text-center text-secondary">Dados de entrega</p>
+      <ul class="list-group">
+        <li class="list-group-item">
+          {{pedido.usuario.nome}}
+        </li>
+        <li class="list-group-item">
+          <span>{{pedido.usuario.endereco_principal | endereco}}</span>
+        </li>
+      </ul>
+      <br>
+      <div *ngIf="pedido.status != 'CANCELADO'" class="row">
+        <div *ngIf="pedido.status == 'PENDENTE' || pedido.status == 'PAY'" class="col p-3" style="width: 33%">
+          <div (click)="pagar(pedido)" class="text-secondary text-center">
+            <button type="button" class="bt-primary button-person bg-warning">Pagar</button>
+          </div>
+        </div>
+        <div *ngIf="pedido.pagamento.status == 'approved'" class="col p-3" style="width: 33%">
+          <div (click)="devolver(pedido)" class="text-secondary text-center">
+            <button type="button" class="bt-primary button-person">Devolver</button>
+          </div>
+        </div>
+        <div *ngIf="pedido.pagamento.status == 'approved'" class="col p-3" style="width: 33%">
+          <div (click)="refazer(pedido)" class="text-secondary text-center">
+            <button type="button" class="bt-primary button-person">Refazer</button>
+          </div>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<spa-footer [nameButton]="nameButton" [isConfirmar]="isConfirmar" [isView]="!isConfirmar" (eventConfirmarSim)="sim()"
+  (eventFooter)="enviar()"></spa-footer>

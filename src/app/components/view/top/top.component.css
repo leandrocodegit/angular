@@ -1,0 +1,38 @@
+ #itemName {
+     font-size: 28px;
+ }
+
+ .close {
+     visibility: hidden;
+ }
+
+ a img {
+     width: 45px;
+ }
+
+ .box-loja {
+     font-family: 'Play', sans-serif !important;
+     letter-spacing: 2px;
+     font-size: 20px;
+     margin-top: 10px;
+ }
+
+ .row {
+     --bs-gutter-x: 0rem !important;
+ }
+
+ .box-top {
+     padding: 0px;
+ }
+
+ .material-symbols-outlined:hover{
+    color: #7f9bff;
+ }
+
+ .icon {
+     float: right;
+     color: #fdcf06;;
+     padding-top: 1px;
+     padding-right: 1px;
+ }
+ 

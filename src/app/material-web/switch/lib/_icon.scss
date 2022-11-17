@@ -1,0 +1,33 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+// stylelint-disable selector-class-pattern --
+// Selector '.md3-*' should only be used in this project.
+
+@use 'sass:map';
+
+@mixin styles() {
+  .md3-switch__icon {
+    .md3-switch--selected & {
+      width: var(--_selected-icon-size);
+      height: var(--_selected-icon-size);
+      fill: var(--_selected-icon-color);
+    }
+
+    .md3-switch--unselected & {
+      width: var(--_unselected-icon-size);
+      height: var(--_unselected-icon-size);
+      fill: var(--_unselected-icon-color);
+    }
+
+    .md3-switch--selected:disabled & {
+      fill: var(--_disabled-selected-icon-color);
+    }
+
+    .md3-switch--unselected:disabled & {
+      fill: var(--_disabled-unselected-icon-color);
+    }
+  }
+}

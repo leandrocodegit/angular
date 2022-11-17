@@ -1,0 +1,15 @@
+.invalido{
+    border-bottom: 4px solid #ff002f;
+ }
+
+ .valido{
+    border-bottom: 4px solid #40ffff;
+ }
+ 
+ .material-symbols-outlined {
+   font-variation-settings:
+   'FILL' 0,
+   'wght' 100,
+   'GRAD' 0,
+   'opsz' 64
+ }

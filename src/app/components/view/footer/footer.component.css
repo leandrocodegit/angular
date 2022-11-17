@@ -1,0 +1,19 @@
+svg:hover {
+    color: #1ff1d4;
+}
+
+.p-2 {
+    padding: 0.1rem !important;
+}
+
+.invalido{
+    border-bottom: 4px solid #ff0022;
+ }
+
+ .valido{
+    border-bottom: 4px solid #40ffff;
+ }
+ 
+ .badge{
+    border-radius: 10px 10px 10px 0px;
+ }

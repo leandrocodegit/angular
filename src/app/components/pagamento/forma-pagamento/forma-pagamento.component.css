@@ -1,0 +1,17 @@
+#forma-pagamento{
+    width: 90vw;
+    height: 90vh;
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: center!important;
+    align-items: center!important;    
+    margin: auto!important;
+    }
+    #forma-pagamento p{
+    color: #212529;
+    font-family: roboto;
+    font-size: 22px;
+    }
+    .card{
+        min-height: 60px;
+    }

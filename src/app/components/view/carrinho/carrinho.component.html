@@ -1,0 +1,48 @@
+<spa-top></spa-top>
+<div class="box-top">
+    <div *ngIf="isEmpty">
+        <div class="container p-4">
+            <div class="container" style="color: #fff8f8;padding-top:40%">
+                <p class="text-center">
+                    <span class="material-symbols-outlined big">
+                        sentiment_very_dissatisfied
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid mt-3">
+        <div *ngFor="let object of produtosPedido" class="row">
+            <div class="graf" style="width:110px; padding:5px">
+                <img class="img-fluid mx-auto d-block image"
+                    src="{{HOST}}/produto/imagem/{{object.qrcode.produto.codigo}}/120/0" width="80px" />
+            </div>
+            <div class="col font-monospace">
+                <span class="text-titulo price">{{object.qrcode.preco | moeda }}
+                    x{{object.quantidade}}</span><br>
+                <span id="totalItem" class="total price" style="color:#69db6c">{{ object.qrcode.preco *
+                    object.quantidade
+                    |
+                    moeda }}</span><br>
+                <span style="font-size: 12px;">{{object.qrcode.produto.descricao}}</span>
+            </div>
+            <div style="width:52px; padding-top: 2px;"> 
+                    <span *ngIf="object.qrcode.produto.estoque.estoqueAtual > object.quantidade" (click)="increment(object)" class="material-symbols-outlined">
+                        arrow_circle_up
+                    </span> 
+                <span *ngIf="object.qrcode.produto.estoque.estoqueAtual > 0" (click)="decrement(object)"  
+                    class="material-symbols-outlined">
+                        arrow_circle_down
+                    </span> 
+                <span (click)="remove(object)" style="color: #ed9c9c;" class="material-symbols-outlined">
+                        delete
+                    </span> 
+            </div>
+            <div *ngIf="(object.quantidade + 5) > object.qrcode.produto.estoque.estoqueAtual" class="text-white p-1"
+                style="font-size: 13px;background: #b288b5;">Estoque baixo ({{object.qrcode.produto.estoque.estoqueAtual
+                < 0? 0 : object.qrcode.produto.estoque.estoqueAtual }}) </div>
+            </div>
+        </div>
+    </div>
+    <spa-footer [nameButton]="nameButton" [isChange]="isChange" (eventVoltar)="voltar()" (eventFooter)="enviar()">
+    </spa-footer>

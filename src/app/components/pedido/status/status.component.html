@@ -1,0 +1,46 @@
+<spa-top [setViewParceiro]="false"></spa-top>
+<spa-load *ngIf="isLoad"></spa-load>
+<div class="container box-top">
+    <div id="response" class="row">
+        <div *ngIf="!isLoad" class="col-md-4 product-detail">
+            <div class="container" style="width: 90%;padding-top:5%">
+                <p *ngIf="!isDanger" class="text-info text-center">
+                    <span class="material-symbols-outlined med">
+                        sentiment_satisfied
+                    </span>
+                </p>
+                <p *ngIf="isDanger" class="text-danger text-center">
+                    <span class="material-symbols-outlined med">
+                        sentiment_dissatisfied
+                    </span>
+                </p>
+                <h3 [class.text-danger]="isDanger" class="text-info text-center" id="status-pagamento">{{mensagem}}</h3>
+            </div>
+            <div class="container" style="padding-top:5%">
+                <div class="row mb-2">
+                    <label class="text-center">Pedido</label>
+                    <p [class.text-danger]="isDanger" class="fs-4 text-center">{{pedido.identificador}}</p>
+                </div>
+                <div class="row mb-2">
+                    <label class="text-center">Pagamento</label>
+                    <p [class.text-danger]="isDanger" class="fs-6 text-center">
+                        {{this.tradutor.traduzirString(pedido.pagamento.status)}}</p>
+                </div>
+                <div class="row mb-2">
+                    <label class="text-center">Status</label>
+                    <p [class.text-danger]="isDanger" class="fs-6 text-center">
+                        {{this.tradutor.traduzirString(pedido.status)}}</p>
+                </div>
+                <div class="row mb-2">
+                    <label class="text-center">Ultima atualização</label>
+                    <p [class.text-danger]="isDanger" class="fs-6 text-center">{{ pedido.ultimaAtualizacao | date:
+                        'dd/MM/yyyy hh:mm:ss'}}</p>
+                </div>
+            </div>
+        </div>
+        <p *ngIf="isDanger" class="text-center p-4">
+            Prazo para lançamento de estorno é de até 48hs úteis.
+        </p>
+    </div>
+    <spa-footer [nameButton]="nameButton" [isViewIcons]="false" [color]="color" (eventFooter)="enviar()"></spa-footer>
+</div>

@@ -1,0 +1,25 @@
+<div class="container-flwid " style="padding-bottom: 30%;padding-top: 20px;">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <i class="material-symbols-outlined">&#xe853;</i> <b class="b-icon">{{usuario.nome}} </b>
+    </li>
+    <li class="list-group-item material-symbols-outlined">
+      <i class="material-symbols-outlined">&#xe0e6;</i> <b class="b-icon">{{usuario.email}} </b>
+    </li>
+    <li class="list-group-item ">
+      <i class="material-symbols-outlined">&#xe0b0;</i> <b class="b-icon">{{usuario.contato}} </b>
+    </li>
+    <li class="list-group-item">
+      <i class="material-symbols-outlined">&#xe870;</i> <b class="b-icon">{{usuario.documento}} </b>
+    </li>
+    <li class="list-group-item">
+      <span class="material-symbols-outlined">
+        home_pin
+      </span>
+      <h5 style="padding-top: 7px;">{{usuario.endereco_principal | endereco}}</h5>
+    </li>
+  </ul>
+  <div class="card-footer h5 p-3 text-secondary text-center">
+    <button (click)="alterar($event)" type="button" class="bt-primary button-person">Alterar</button>
+  </div>
+</div>

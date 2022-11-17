@@ -1,0 +1,30 @@
+//
+// Copyright 2022 Google LLC
+// SPDX-License-Identifier: Apache-2.0
+//
+
+@use '../../sass/theme';
+@use '../../tokens';
+@use './shared';
+
+@mixin theme($tokens) {
+  $tokens: theme.validate-theme(
+    tokens.md-comp-outlined-segmented-button-values(),
+    $tokens
+  );
+  $tokens: shared.resolve-tokens($tokens);
+  $tokens: theme.create-theme-vars($tokens, 'segmented-button');
+  @include theme.emit-theme-vars($tokens);
+}
+
+@mixin styles() {
+  $tokens: tokens.md-comp-outlined-segmented-button-values();
+  $tokens: shared.resolve-tokens($tokens);
+  $tokens: theme.create-theme-vars($tokens, 'segmented-button');
+
+  * {
+    @each $token, $value in $tokens {
+      --_#{$token}: #{$value};
+    }
+  }
+}

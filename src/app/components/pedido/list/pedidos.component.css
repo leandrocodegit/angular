@@ -1,0 +1,40 @@
+.material-symbols-outlined {
+    font-size: 30px;
+}
+
+.row{
+    box-shadow: -1px 1px 2px rgb(223 223 223);
+    padding: 5px;
+}
+
+.row:hover{
+    background-color: rgb(224, 224, 224);
+}
+
+.item-col{
+    padding-top: 5px;
+    margin-left: 10px;
+}
+
+.dataPedido{
+    font-size: 12px; 
+    color: #c0c0c0;
+}
+
+.mdc-drawer{ 
+    height: 1024px; 
+}
+
+.mdc-drawer__content{
+    margin-bottom: 25%; 
+}
+
+.mdc-drawer--dismissible{
+    width: 92%;
+    
+}
+
+button{
+    width: 100%; 
+    border-radius: 2px!important;  
+  }
